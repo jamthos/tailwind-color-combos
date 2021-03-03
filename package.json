@@ -5,7 +5,8 @@
   "description": "Tailwind Color Combos",
   "author": "James Thomas",
   "keywords": [
-    "gatsby"
+    "gatsby",
+    "tailwind"
   ],
   "scripts": {
     "develop": "gatsby develop",
@@ -28,7 +29,7 @@
     "react-helmet": "^6.1.0",
     "styled-components": "^5.2.1",
     "tailwindcss": "^2.0.3",
-    "twin.macro": "^2.2.3"
+    "twin.macro": "^2.3.0"
   },
   "devDependencies": {
     "postcss": "^8.2.6"
