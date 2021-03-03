@@ -14,5 +14,7 @@
   "tailwindCSS.includeLanguages": {
     "typescript": "javascript",
     "typescriptreact": "javascript"
-  }
+  },
+
+  "editor.colorDecorators": false
 }
