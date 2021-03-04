@@ -1,5 +1,5 @@
-import React, { useState } from "react"
-import "twin.macro"
+import React, { useReducer, useState } from "react"
+import tw from "twin.macro"
 import colors from "tailwindcss/colors"
 
 import Layout from "../components/Layout"
@@ -12,6 +12,7 @@ import TailwindLayout from "../components/TailwindLayout"
 
 import { setKeyPalette } from "../themes/mytheme"
 
+//set readable names for some of the color keys
 const colorNames = {
   lightBlue: "light blue",
   warmGray: "warm gray",
@@ -20,87 +21,98 @@ const colorNames = {
   blueGray: "blue gray",
 }
 
-const IndexPage = () => {
+// set initial state for color combos
+const initialColorState = {
+  primary: "rose",
+  secondary: "lightBlue",
+  tertiary: "pink",
+  neutral: "trueGray",
+}
 
-  // set css variables to default palette
-  const defaultTheme = {
-    ...setKeyPalette(colors.rose, "primary"),
-    ...setKeyPalette(colors.lightBlue, "secondary"),
+// set css variables to default palette
+const defaultTheme = {
+  ...setKeyPalette(colors.rose, "primary"),
+  ...setKeyPalette(colors.lightBlue, "secondary"),
+  ...setKeyPalette(colors.pink, "tertiary"),
+  ...setKeyPalette(colors.trueGray, "neutral"),
+}
+
+// reducer to save the selected color in state
+const colorReducer = (state, action) => {
+  switch (action.type) {
+    case "primary":
+      return {
+        ...state,
+        primary: action.newColor,
+      }
+    case "secondary":
+      return {
+        ...state,
+        secondary: action.newColor,
+      }
+    case "tertiary":
+      return {
+        ...state,
+        tertiary: action.newColor,
+      }
+    case "neutral":
+      return {
+        ...state,
+        neutral: action.newColor,
+      }
+    default:
+      throw new Error()
   }
+}
 
-  //set default state to default color palettes
-  const [primaryColor, setPrimaryColor] = useState("rose")
-  const [primaryColorPreview, setPrimaryColorPreview] = useState("rose")
-  const [secondaryColor, setSecondaryColor] = useState("lightBlue")
-  const [secondaryColorPreview, setSecondaryColorPreview] = useState(
-    "lightBlue"
+const IndexPage = () => {
+  const [colorState, dispatchColorReducer] = useReducer(
+    colorReducer,
+    initialColorState
   )
+  const [previewColors, setPreviewColors] = useState(initialColorState)
+
   const [dynamicTheme, setDynamicTheme] = useState(defaultTheme)
 
-  // callback function for mouseEnter and mouseLeave
-  const previewColor = (colorName, isOnEnter, el, whatLevel) => {
+  // callback function for mouseEnter and mouseLeave on color picker
+  // changes swatch to show preview color and name
+  // returns to selected color in state on mouseLeave
+  const setPreview = (colorName, isOnEnter, el, whatLevel) => {
     if (isOnEnter) {
       el.style.backgroundColor = colors[colorName][500]
       el.style.color = colors[colorName][500]
-      switch (whatLevel) {
-        case "primary":
-          setPrimaryColorPreview(colorName)
-          break
-        case "secondary":
-          setSecondaryColorPreview(colorName)
-          break
-        default:
-          break
-      }
+      setPreviewColors({ ...previewColors, [whatLevel]: colorName })
     } else {
-      switch (whatLevel) {
-        case "primary":
-          el.style.backgroundColor = colors[primaryColor][500]
-          el.style.color = colors[primaryColor][500]
-          setPrimaryColorPreview(primaryColor)
-          break
-        case "secondary":
-          el.style.backgroundColor = colors[secondaryColor][500]
-          el.style.color = colors[secondaryColor][500]
-          setSecondaryColorPreview(secondaryColor)
-          break
-        default:
-          break
-      }
+      el.style.backgroundColor = colors[colorState[whatLevel]][500]
+      el.style.color = colors[colorState[whatLevel]][500]
+      setPreviewColors({ ...previewColors, [whatLevel]: "" })
     }
   }
 
-  // callback function for click event on color picker
+  // callback function for click event on color picker swatch
+  // sets new color in state and updates theme's custom properties
   const setColor = (whatColor, whatLevel) => {
-    if (whatLevel === "primary") {
-      setPrimaryColor(whatColor)
-      setDynamicTheme((currentTheme) => ({
-        ...currentTheme,
-        ...setKeyPalette(colors[whatColor], "primary"),
-      }))
-    }
-    if (whatLevel === "secondary") {
-      setSecondaryColor(whatColor)
-      setDynamicTheme((currentTheme) => ({
-        ...currentTheme,
-        ...setKeyPalette(colors[whatColor], "secondary"),
-      }))
-    }
+    dispatchColorReducer({ type: whatLevel, newColor: whatColor })
+
+    setDynamicTheme((currentTheme) => ({
+      ...currentTheme,
+      ...setKeyPalette(colors[whatColor], whatLevel),
+    }))
   }
 
   return (
     <Layout css={dynamicTheme}>
       <main tw="container mx-auto my-8 p-2">
-        <h1 tw="text-2xl font-bold border-b mb-4 tracking-tight text-gray-800">
+        <h1 tw="text-2xl font-bold  mb-4 tracking-tight text-gray-800">
           Tailwind Extended Colors
         </h1>
-        <ul tw="flex flex-wrap justify-start gap-1">
+        <ul tw="flex flex-wrap justify-start gap-1 border-t pt-4 hidden">
           {Object.keys(colors).map((c, i) => {
             if (i > 1) {
               return (
                 <li
                   key={c}
-                  tw="p-2 rounded shadow text-xs font-bold"
+                  tw="p-2 py-1 rounded shadow text-xs font-light"
                   style={{
                     backgroundColor: colors[c][500],
                     color: colors[c][50],
@@ -116,14 +128,14 @@ const IndexPage = () => {
           })}
         </ul>
 
-        <div tw="my-10 p-4 pt-2 border rounded-lg grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4">
+        <div tw="mb-10 p-4 pt-2 border rounded-lg grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4">
           <ColorPicker
             colors={colors}
             colorNames={colorNames}
             whatLevel={"primary"}
-            keyColor={primaryColor}
-            keyColorPreview={primaryColorPreview}
-            previewColor={previewColor}
+            keyColor={colorState.primary}
+            previewColors={previewColors}
+            setPreview={setPreview}
             setColor={setColor}
           />
 
@@ -131,15 +143,41 @@ const IndexPage = () => {
             colors={colors}
             colorNames={colorNames}
             whatLevel={"secondary"}
-            keyColor={secondaryColor}
-            keyColorPreview={secondaryColorPreview}
-            previewColor={previewColor}
+            keyColor={colorState.secondary}
+            previewColors={previewColors}
+            setPreview={setPreview}
+            setColor={setColor}
+          />
+
+          <ColorPicker
+            colors={colors}
+            colorNames={colorNames}
+            whatLevel={"tertiary"}
+            keyColor={colorState.tertiary}
+            previewColors={previewColors}
+            setPreview={setPreview}
+            setColor={setColor}
+          />
+
+          <ColorPicker
+            colors={colors}
+            colorNames={colorNames}
+            whatLevel={"neutral"}
+            keyColor={colorState.neutral}
+            previewColors={previewColors}
+            setPreview={setPreview}
             setColor={setColor}
           />
         </div>
 
         <div tw="mt-8">
-          <h2 tw="text-2xl font-bold tracking-tight mb-2">Tailwind UI Sample</h2>
+          <p>
+            <Tag tw="bg-primary-200 text-primary-500">primary</Tag>{" "}
+            <Tag tw="bg-neutral-200 text-neutral-500">neutral</Tag>
+          </p>
+          <h2 tw="text-2xl font-bold tracking-tight mb-2">
+            Tailwind UI Sample
+          </h2>
           <div tw="p-5 border rounded-lg">
             <TailwindBanner />
             <TailwindCTA />
@@ -152,3 +190,5 @@ const IndexPage = () => {
 }
 
 export default IndexPage
+
+const Tag = tw.span`text-xs px-3 py-0.5 rounded-full shadow-sm font-light`

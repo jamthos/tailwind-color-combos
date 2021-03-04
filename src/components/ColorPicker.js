@@ -1,32 +1,31 @@
-import React, { useRef } from "react";
-import { css } from "twin.macro";
+import React, { useRef } from "react"
+import { css } from "twin.macro"
 
 const ColorPicker = ({
   colors,
   colorNames,
   whatLevel,
   keyColor,
-  keyColorPreview,
-  previewColor,
+  previewColors,
+  setPreview,
   setColor,
 }) => {
-  const colorPreview = useRef(null);
+  const colorPreview = useRef(null)
 
   return (
     <div tw="p-2">
-      <h3 tw="tracking-tight font-bold">{whatLevel.toUpperCase()} Color:</h3>
+      <h3 tw="tracking-wide font-thin">{whatLevel.toUpperCase()}</h3>
       <div tw="grid grid-cols-2 gap-2">
         <div
-          tw="rounded shadow flex flex-col items-center justify-center relative transition-colors duration-100"
+          tw="rounded flex flex-col items-center justify-center relative transition-colors duration-100 shadow-inner"
           css={css`
             background-color: ${colors[keyColor][500]};
             color: ${colors[keyColor][500]};
           `}
-          ref={colorPreview}
-        >
-          <h3 tw="px-2 bg-white rounded-full shadow text-sm tracking-tighter">
-            {colorNames[keyColorPreview] ||
-              keyColorPreview ||
+          ref={colorPreview}>
+          <h3 tw="p-1 px-2 bg-white rounded-full shadow-md text-xs leading-none tracking-wide font-light">
+            {colorNames[previewColors[whatLevel]] ||
+              previewColors[whatLevel] ||
               colorNames[keyColor] ||
               keyColor}
           </h3>
@@ -39,41 +38,30 @@ const ColorPicker = ({
                   <li tw="h-6" key={c + i}>
                     <button
                       onMouseEnter={() =>
-                        previewColor(
-                          c,
-                          true,
-                          colorPreview.current,
-                          whatLevel
-                        )
+                        setPreview(c, true, colorPreview.current, whatLevel)
                       }
                       onMouseLeave={() =>
-                        previewColor(
-                          c,
-                          false,
-                          colorPreview.current,
-                          whatLevel
-                        )
+                        setPreview(c, false, colorPreview.current, whatLevel)
                       }
                       onClick={() => setColor(c, whatLevel)}
                       css={css`
                         background-color: ${colors[c][500]};
                         color: ${colors[c][700]};
                       `}
-                      tw="rounded font-bold w-6 h-6 border-white border-2 focus:(border-current outline-none) hover:(border-current cursor-pointer)"
-                    >
+                      tw="block rounded font-bold w-6 h-6 border-white border-2 focus:(border-current outline-none) hover:(border-current cursor-pointer shadow-inner)">
                       <span tw="hidden">{c}</span>
                     </button>
                   </li>
-                );
+                )
               } else {
-                return null;
+                return null
               }
             })}
           </ul>
         </div>
       </div>
     </div>
-  );
-};
+  )
+}
 
-export default ColorPicker;
+export default ColorPicker

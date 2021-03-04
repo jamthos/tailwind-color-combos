@@ -6,10 +6,10 @@ const TailwindLayout = () => (
     <div tw="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
       <div tw="lg:text-center">
         <h2 tw="text-base text-primary-600 font-semibold tracking-wide uppercase">Transactions</h2>
-        <p tw="mt-2 text-3xl leading-8 font-extrabold tracking-tight text-gray-900 sm:text-4xl">
+        <p tw="mt-2 text-3xl leading-8 font-extrabold tracking-tight text-neutral-900 sm:text-4xl">
           A better way to send money
         </p>
-        <p tw="mt-4 max-w-2xl text-xl text-gray-500 lg:mx-auto">
+        <p tw="mt-4 max-w-2xl text-xl text-neutral-500 lg:mx-auto">
           Lorem ipsum dolor sit amet consect adipisicing elit. Possimus magnam voluptatum cupiditate veritatis in accusamus quisquam.
         </p>
       </div>
@@ -25,10 +25,10 @@ const TailwindLayout = () => (
               </div>
             </div>
             <div tw="ml-4">
-              <dt tw="text-lg leading-6 font-medium text-gray-900">
+              <dt tw="text-lg leading-6 font-medium text-neutral-900">
                 Competitive exchange rates
               </dt>
-              <dd tw="mt-2 text-base text-gray-500">
+              <dd tw="mt-2 text-base text-neutral-500">
                 Lorem ipsum, dolor sit amet consectetur adipisicing elit. Maiores impedit perferendis suscipit eaque, iste dolor cupiditate blanditiis ratione.
               </dd>
             </div>
@@ -43,10 +43,10 @@ const TailwindLayout = () => (
               </div>
             </div>
             <div tw="ml-4">
-              <dt tw="text-lg leading-6 font-medium text-gray-900">
+              <dt tw="text-lg leading-6 font-medium text-neutral-900">
                 No hidden fees
               </dt>
-              <dd tw="mt-2 text-base text-gray-500">
+              <dd tw="mt-2 text-base text-neutral-500">
                 Lorem ipsum, dolor sit amet consectetur adipisicing elit. Maiores impedit perferendis suscipit eaque, iste dolor cupiditate blanditiis ratione.
               </dd>
             </div>
@@ -61,10 +61,10 @@ const TailwindLayout = () => (
               </div>
             </div>
             <div tw="ml-4">
-              <dt tw="text-lg leading-6 font-medium text-gray-900">
+              <dt tw="text-lg leading-6 font-medium text-neutral-900">
                 Transfers are instant
               </dt>
-              <dd tw="mt-2 text-base text-gray-500">
+              <dd tw="mt-2 text-base text-neutral-500">
                 Lorem ipsum, dolor sit amet consectetur adipisicing elit. Maiores impedit perferendis suscipit eaque, iste dolor cupiditate blanditiis ratione.
               </dd>
             </div>
@@ -79,10 +79,10 @@ const TailwindLayout = () => (
               </div>
             </div>
             <div tw="ml-4">
-              <dt tw="text-lg leading-6 font-medium text-gray-900">
+              <dt tw="text-lg leading-6 font-medium text-neutral-900">
                 Mobile notifications
               </dt>
-              <dd tw="mt-2 text-base text-gray-500">
+              <dd tw="mt-2 text-base text-neutral-500">
                 Lorem ipsum, dolor sit amet consectetur adipisicing elit. Maiores impedit perferendis suscipit eaque, iste dolor cupiditate blanditiis ratione.
               </dd>
             </div>
