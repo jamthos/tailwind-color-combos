@@ -4,7 +4,7 @@ import { css } from "twin.macro";
 const ColorPicker = ({
   colors,
   colorNames,
-  keyColorType,
+  whatLevel,
   keyColor,
   keyColorPreview,
   previewColor,
@@ -14,7 +14,7 @@ const ColorPicker = ({
 
   return (
     <div tw="p-2">
-      <h3 tw="tracking-tight font-bold">{keyColorType.toUpperCase()} Color:</h3>
+      <h3 tw="tracking-tight font-bold">{whatLevel.toUpperCase()} Color:</h3>
       <div tw="grid grid-cols-2 gap-2">
         <div
           tw="rounded shadow flex flex-col items-center justify-center relative transition-colors duration-100"
@@ -43,7 +43,7 @@ const ColorPicker = ({
                           c,
                           true,
                           colorPreview.current,
-                          keyColorType
+                          whatLevel
                         )
                       }
                       onMouseLeave={() =>
@@ -51,10 +51,10 @@ const ColorPicker = ({
                           c,
                           false,
                           colorPreview.current,
-                          keyColorType
+                          whatLevel
                         )
                       }
-                      onClick={() => setColor(c, keyColorType)}
+                      onClick={() => setColor(c, whatLevel)}
                       css={css`
                         background-color: ${colors[c][500]};
                         color: ${colors[c][700]};
