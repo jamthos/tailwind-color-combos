@@ -1,10 +1,10 @@
 import colors from "tailwindcss/colors"
 
-export const setKeyPalette = (colorSet, themeKey) => {
+export const setKeyPalette = (colorSet, colorLevel) => {
   let themeSet = {}
   Object.keys(colorSet).map(
     (colorKey) =>
-      (themeSet["--" + themeKey + "-" + colorKey] = colorSet[colorKey])
+      (themeSet["--" + colorLevel + "-" + colorKey] = colorSet[colorKey])
   )
   return themeSet
 }

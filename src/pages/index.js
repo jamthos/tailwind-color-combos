@@ -1,15 +1,16 @@
-import React, { useState } from "react";
-import "twin.macro";
+import React, { useState } from "react"
+import "twin.macro"
+import colors from "tailwindcss/colors"
 
-import Layout from "../components/Layout";
-import TailwindCTA from "../components/TailwindCTA";
-import TailwindBanner from "../components/TailwindBanner";
-import TailwindLayout from "../components/TailwindLayout";
-import colors from "tailwindcss/colors";
+import Layout from "../components/Layout"
+import ColorPicker from "../components/ColorPicker"
 
-// import myThemes from "../themes/mytheme"
-import { setKeyPalette } from "../themes/mytheme";
-import ColorPicker from "../components/ColorPicker";
+// Example components
+import TailwindCTA from "../components/TailwindCTA"
+import TailwindBanner from "../components/TailwindBanner"
+import TailwindLayout from "../components/TailwindLayout"
+
+import { setKeyPalette } from "../themes/mytheme"
 
 const colorNames = {
   lightBlue: "light blue",
@@ -17,71 +18,75 @@ const colorNames = {
   trueGray: "true gray",
   coolGray: "cool gray",
   blueGray: "blue gray",
-};
+}
 
-// markup
 const IndexPage = () => {
+
+  // set css variables to default palette
   const defaultTheme = {
     ...setKeyPalette(colors.rose, "primary"),
     ...setKeyPalette(colors.lightBlue, "secondary"),
-  };
+  }
 
-  const [primaryColor, setPrimaryColor] = useState("rose");
-  const [primaryColorPreview, setPrimaryColorPreview] = useState("rose");
-  const [secondaryColor, setSecondaryColor] = useState("lightBlue");
+  //set default state to default color palettes
+  const [primaryColor, setPrimaryColor] = useState("rose")
+  const [primaryColorPreview, setPrimaryColorPreview] = useState("rose")
+  const [secondaryColor, setSecondaryColor] = useState("lightBlue")
   const [secondaryColorPreview, setSecondaryColorPreview] = useState(
     "lightBlue"
-  );
-  const [dynamicTheme, setDynamicTheme] = useState(defaultTheme);
+  )
+  const [dynamicTheme, setDynamicTheme] = useState(defaultTheme)
 
-  const previewColor = (colorName, onEnter, el, colorType) => {
-    if (onEnter) {
-      el.style.backgroundColor = colors[colorName][500];
-      el.style.color = colors[colorName][500];
-      switch (colorType) {
+  // callback function for mouseEnter and mouseLeave
+  const previewColor = (colorName, isOnEnter, el, whatLevel) => {
+    if (isOnEnter) {
+      el.style.backgroundColor = colors[colorName][500]
+      el.style.color = colors[colorName][500]
+      switch (whatLevel) {
         case "primary":
-          setPrimaryColorPreview(colorName);
-          break;
+          setPrimaryColorPreview(colorName)
+          break
         case "secondary":
-          setSecondaryColorPreview(colorName);
-          break;
+          setSecondaryColorPreview(colorName)
+          break
         default:
-          break;
+          break
       }
     } else {
-      switch (colorType) {
+      switch (whatLevel) {
         case "primary":
-          el.style.backgroundColor = colors[primaryColor][500];
-          el.style.color = colors[primaryColor][500];
-          setPrimaryColorPreview(primaryColor);
-          break;
+          el.style.backgroundColor = colors[primaryColor][500]
+          el.style.color = colors[primaryColor][500]
+          setPrimaryColorPreview(primaryColor)
+          break
         case "secondary":
-          el.style.backgroundColor = colors[secondaryColor][500];
-          el.style.color = colors[secondaryColor][500];
-          setSecondaryColorPreview(secondaryColor);
-          break;
+          el.style.backgroundColor = colors[secondaryColor][500]
+          el.style.color = colors[secondaryColor][500]
+          setSecondaryColorPreview(secondaryColor)
+          break
         default:
-          break;
+          break
       }
     }
-  };
+  }
 
+  // callback function for click event on color picker
   const setColor = (whatColor, whatLevel) => {
     if (whatLevel === "primary") {
-      setPrimaryColor(whatColor);
+      setPrimaryColor(whatColor)
       setDynamicTheme((currentTheme) => ({
         ...currentTheme,
         ...setKeyPalette(colors[whatColor], "primary"),
-      }));
+      }))
     }
-    if(whatLevel === "secondary"){
-      setSecondaryColor(whatColor);
+    if (whatLevel === "secondary") {
+      setSecondaryColor(whatColor)
       setDynamicTheme((currentTheme) => ({
         ...currentTheme,
         ...setKeyPalette(colors[whatColor], "secondary"),
-      }));
-    };
-  };
+      }))
+    }
+  }
 
   return (
     <Layout css={dynamicTheme}>
@@ -99,24 +104,23 @@ const IndexPage = () => {
                   style={{
                     backgroundColor: colors[c][500],
                     color: colors[c][50],
-                  }}
-                >
+                  }}>
                   {!colorNames[c]
                     ? c.toUpperCase()
                     : colorNames[c].toUpperCase()}
                 </li>
-              );
+              )
             } else {
-              return null;
+              return null
             }
           })}
         </ul>
 
-        <div tw="my-10 p-4 border rounded-lg grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4">
+        <div tw="my-10 p-4 pt-2 border rounded-lg grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4">
           <ColorPicker
             colors={colors}
             colorNames={colorNames}
-            keyColorType={"primary"}
+            whatLevel={"primary"}
             keyColor={primaryColor}
             keyColorPreview={primaryColorPreview}
             previewColor={previewColor}
@@ -126,7 +130,7 @@ const IndexPage = () => {
           <ColorPicker
             colors={colors}
             colorNames={colorNames}
-            keyColorType={"secondary"}
+            whatLevel={"secondary"}
             keyColor={secondaryColor}
             keyColorPreview={secondaryColorPreview}
             previewColor={previewColor}
@@ -135,7 +139,7 @@ const IndexPage = () => {
         </div>
 
         <div tw="mt-8">
-          <h2 tw="text-2xl font-bold tracking-tight mb-2">Sample components</h2>
+          <h2 tw="text-2xl font-bold tracking-tight mb-2">Tailwind UI Sample</h2>
           <div tw="p-5 border rounded-lg">
             <TailwindBanner />
             <TailwindCTA />
@@ -144,7 +148,7 @@ const IndexPage = () => {
         </div>
       </main>
     </Layout>
-  );
-};
+  )
+}
 
-export default IndexPage;
+export default IndexPage
