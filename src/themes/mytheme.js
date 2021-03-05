@@ -1,6 +1,6 @@
 import colors from "tailwindcss/colors"
 
-export const setKeyPalette = (colorSet, colorLevel) => {
+export const setColorPalette = (colorSet, colorLevel) => {
   let themeSet = {}
   Object.keys(colorSet).map(
     (colorKey) =>
@@ -10,15 +10,15 @@ export const setKeyPalette = (colorSet, colorLevel) => {
 }
 
 const defaultTheme = {
-  ...setKeyPalette(colors.blue, "primary"),
+  ...setColorPalette(colors.blue, "primary"),
 }
-const stationeryTheme = {
-  ...setKeyPalette(colors.rose, "primary"),
+const pinkTheme = {
+  ...setColorPalette(colors.rose, "primary"),
 }
 
 const MyThemes = {
   default: defaultTheme,
-  stationery: stationeryTheme,
+  pink: pinkTheme,
 }
 
 export default MyThemes

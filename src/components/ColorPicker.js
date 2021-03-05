@@ -1,33 +1,35 @@
 import React, { useRef } from "react"
 import { css } from "twin.macro"
+import colors from "tailwindcss/colors"
 
 const ColorPicker = ({
-  colors,
   colorNames,
-  whatLevel,
-  keyColor,
+  colorLevel,
+  currentColor,
   previewColors,
   setPreview,
   setColor,
 }) => {
+  //set ref for swatch so callbacks know what element to change
   const colorPreview = useRef(null)
 
   return (
     <div tw="p-2">
-      <h3 tw="tracking-wide font-thin">{whatLevel.toUpperCase()}</h3>
+      <h3 tw="tracking-wide font-thin">{colorLevel.toUpperCase()}</h3>
       <div tw="grid grid-cols-2 gap-2">
         <div
           tw="rounded flex flex-col items-center justify-center relative transition-colors duration-100 shadow-inner"
           css={css`
-            background-color: ${colors[keyColor][500]};
-            color: ${colors[keyColor][500]};
+            background-color: ${colors[currentColor][500]};
+            color: ${colors[currentColor][500]};
           `}
           ref={colorPreview}>
           <h3 tw="p-1 px-2 bg-white rounded-full shadow-md text-xs leading-none tracking-wide font-light">
-            {colorNames[previewColors[whatLevel]] ||
-              previewColors[whatLevel] ||
-              colorNames[keyColor] ||
-              keyColor}
+            { // show color name on preview swatch
+              colorNames[previewColors[colorLevel]] ||
+              previewColors[colorLevel] ||
+              colorNames[currentColor] ||
+              currentColor}
           </h3>
         </div>
         <div>
@@ -38,12 +40,12 @@ const ColorPicker = ({
                   <li tw="h-6" key={c + i}>
                     <button
                       onMouseEnter={() =>
-                        setPreview(c, true, colorPreview.current, whatLevel)
+                        setPreview(c, true, colorPreview.current, colorLevel)
                       }
                       onMouseLeave={() =>
-                        setPreview(c, false, colorPreview.current, whatLevel)
+                        setPreview(c, false, colorPreview.current, colorLevel)
                       }
-                      onClick={() => setColor(c, whatLevel)}
+                      onClick={() => setColor(c, colorLevel)}
                       css={css`
                         background-color: ${colors[c][500]};
                         color: ${colors[c][700]};

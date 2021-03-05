@@ -10,7 +10,7 @@ import TailwindCTA from "../components/TailwindCTA"
 import TailwindBanner from "../components/TailwindBanner"
 import TailwindLayout from "../components/TailwindLayout"
 
-import { setKeyPalette } from "../themes/mytheme"
+import { setColorPalette } from "../themes/mytheme"
 
 //set readable names for some of the color keys
 const colorNames = {
@@ -29,12 +29,15 @@ const initialColorState = {
   neutral: "trueGray",
 }
 
-// set css variables to default palette
+// setColorPalette
+// sets css custom properties to match a tailwind color
+// e.g. {--primary-100: tailwind.colors.rose.100}
+// returns an css object with keys 50 to 900 matching tailwind
 const defaultTheme = {
-  ...setKeyPalette(colors.rose, "primary"),
-  ...setKeyPalette(colors.lightBlue, "secondary"),
-  ...setKeyPalette(colors.pink, "tertiary"),
-  ...setKeyPalette(colors.trueGray, "neutral"),
+  ...setColorPalette(colors.rose, "primary"),
+  ...setColorPalette(colors.lightBlue, "secondary"),
+  ...setColorPalette(colors.pink, "tertiary"),
+  ...setColorPalette(colors.trueGray, "neutral"),
 }
 
 // reducer to save the selected color in state
@@ -77,26 +80,26 @@ const IndexPage = () => {
   // callback function for mouseEnter and mouseLeave on color picker
   // changes swatch to show preview color and name
   // returns to selected color in state on mouseLeave
-  const setPreview = (colorName, isOnEnter, el, whatLevel) => {
+  const setPreview = (colorName, isOnEnter, el, colorLevel) => {
     if (isOnEnter) {
       el.style.backgroundColor = colors[colorName][500]
       el.style.color = colors[colorName][500]
-      setPreviewColors({ ...previewColors, [whatLevel]: colorName })
+      setPreviewColors({ ...previewColors, [colorLevel]: colorName })
     } else {
-      el.style.backgroundColor = colors[colorState[whatLevel]][500]
-      el.style.color = colors[colorState[whatLevel]][500]
-      setPreviewColors({ ...previewColors, [whatLevel]: "" })
+      el.style.backgroundColor = colors[colorState[colorLevel]][500]
+      el.style.color = colors[colorState[colorLevel]][500]
+      setPreviewColors({ ...previewColors, [colorLevel]: "" })
     }
   }
 
   // callback function for click event on color picker swatch
   // sets new color in state and updates theme's custom properties
-  const setColor = (whatColor, whatLevel) => {
-    dispatchColorReducer({ type: whatLevel, newColor: whatColor })
+  const setColor = (whatColor, colorLevel) => {
+    dispatchColorReducer({ type: colorLevel, newColor: whatColor })
 
     setDynamicTheme((currentTheme) => ({
       ...currentTheme,
-      ...setKeyPalette(colors[whatColor], whatLevel),
+      ...setColorPalette(colors[whatColor], colorLevel),
     }))
   }
 
@@ -130,40 +133,36 @@ const IndexPage = () => {
 
         <div tw="mb-10 p-4 pt-2 border rounded-lg grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4">
           <ColorPicker
-            colors={colors}
             colorNames={colorNames}
-            whatLevel={"primary"}
-            keyColor={colorState.primary}
+            colorLevel={"primary"}
+            currentColor={colorState.primary}
             previewColors={previewColors}
             setPreview={setPreview}
             setColor={setColor}
           />
 
           <ColorPicker
-            colors={colors}
             colorNames={colorNames}
-            whatLevel={"secondary"}
-            keyColor={colorState.secondary}
+            colorLevel={"secondary"}
+            currentColor={colorState.secondary}
             previewColors={previewColors}
             setPreview={setPreview}
             setColor={setColor}
           />
 
           <ColorPicker
-            colors={colors}
             colorNames={colorNames}
-            whatLevel={"tertiary"}
-            keyColor={colorState.tertiary}
+            colorLevel={"tertiary"}
+            currentColor={colorState.tertiary}
             previewColors={previewColors}
             setPreview={setPreview}
             setColor={setColor}
           />
 
           <ColorPicker
-            colors={colors}
             colorNames={colorNames}
-            whatLevel={"neutral"}
-            keyColor={colorState.neutral}
+            colorLevel={"neutral"}
+            currentColor={colorState.neutral}
             previewColors={previewColors}
             setPreview={setPreview}
             setColor={setColor}
