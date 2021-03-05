@@ -106,7 +106,7 @@ const IndexPage = () => {
         <h1 tw="text-2xl font-bold  mb-4 tracking-tight text-gray-800">
           Tailwind Extended Colors
         </h1>
-        <ul tw="flex flex-wrap justify-start gap-1 border-t pt-4 hidden">
+        <ul tw="flex flex-wrap justify-start gap-1 border-t pt-4 mb-4">
           {Object.keys(colors).map((c, i) => {
             if (i > 1) {
               return (
