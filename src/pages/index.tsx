@@ -9,6 +9,7 @@ import ColorPicker from "../components/ColorPicker"
 import TailwindCTA from "../components/TailwindCTA"
 import TailwindBanner from "../components/TailwindBanner"
 import TailwindLayout from "../components/TailwindLayout"
+import PriceCards from "../components/PriceCards"
 
 import { setColorPalette } from "../themes/mytheme"
 
@@ -181,6 +182,20 @@ const IndexPage = () => {
             <TailwindBanner />
             <TailwindCTA />
             <TailwindLayout />
+          </div>
+        </div>
+
+        <div tw="mt-8">
+          <p>
+            <Tag tw="bg-primary-200 text-primary-500">primary</Tag>{" "}
+            <Tag tw="bg-secondary-200 text-secondary-500">secondary</Tag>{" "}
+            <Tag tw="bg-neutral-200 text-neutral-500">neutral</Tag>
+          </p>
+          <h2 tw="text-2xl font-bold tracking-tight mb-2">
+            Cards with Secondary Color
+          </h2>
+          <div tw="p-5 border rounded-lg">
+            <PriceCards />
           </div>
         </div>
       </main>
