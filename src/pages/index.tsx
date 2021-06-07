@@ -13,8 +13,10 @@ import PriceCards from "../components/PriceCards"
 
 import { setColorPalette } from "../themes/mytheme"
 
+import { ColorNames, ColorState } from "../types"
+
 //set readable names for some of the color keys
-const colorNames = {
+const colorNames: ColorNames = {
   lightBlue: "light blue",
   warmGray: "warm gray",
   trueGray: "true gray",
@@ -23,7 +25,7 @@ const colorNames = {
 }
 
 // set initial state for color combos
-const initialColorState = {
+const initialColorState: ColorState = {
   primary: "rose",
   secondary: "lightBlue",
   tertiary: "pink",
@@ -42,7 +44,10 @@ const defaultTheme = {
 }
 
 // reducer to save the selected color in state
-const colorReducer = (state, action) => {
+const colorReducer = (
+  state: ColorState,
+  action: { type: string; newColor: string }
+) => {
   switch (action.type) {
     case "primary":
       return {
@@ -69,7 +74,7 @@ const colorReducer = (state, action) => {
   }
 }
 
-const IndexPage = () => {
+const IndexPage = function () {
   const [colorState, dispatchColorReducer] = useReducer(
     colorReducer,
     initialColorState
@@ -81,7 +86,12 @@ const IndexPage = () => {
   // callback function for mouseEnter and mouseLeave on color picker
   // changes swatch to show preview color and name
   // returns to selected color in state on mouseLeave
-  const setPreview = (colorName, isOnEnter, el, colorLevel) => {
+  const setPreview = (
+    colorName: string,
+    isOnEnter: boolean,
+    el: HTMLDivElement,
+    colorLevel: string
+  ) => {
     if (isOnEnter) {
       el.style.backgroundColor = colors[colorName][500]
       el.style.color = colors[colorName][500]
@@ -95,7 +105,7 @@ const IndexPage = () => {
 
   // callback function for click event on color picker swatch
   // sets new color in state and updates theme's custom properties
-  const setColor = (whatColor, colorLevel) => {
+  const setColor = (whatColor: string, colorLevel: string) => {
     dispatchColorReducer({ type: colorLevel, newColor: whatColor })
 
     setDynamicTheme((currentTheme) => ({
@@ -120,7 +130,8 @@ const IndexPage = () => {
                   style={{
                     backgroundColor: colors[c][500],
                     color: colors[c][50],
-                  }}>
+                  }}
+                >
                   {!colorNames[c]
                     ? c.toUpperCase()
                     : colorNames[c].toUpperCase()}

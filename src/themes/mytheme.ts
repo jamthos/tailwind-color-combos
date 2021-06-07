@@ -1,6 +1,7 @@
 import colors from "tailwindcss/colors"
+import { ColorSet } from "../types"
 
-export const setColorPalette = (colorSet, colorLevel) => {
+export const setColorPalette = (colorSet: ColorSet, colorLevel: string) => {
   let themeSet = {}
   Object.keys(colorSet).map(
     (colorKey) =>
