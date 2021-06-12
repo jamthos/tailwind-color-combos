@@ -1,3 +1,4 @@
+//@ts-check
 import React, { useReducer, useState } from "react"
 import tw from "twin.macro"
 import colors from "tailwindcss/colors"
@@ -41,7 +42,13 @@ const defaultTheme = {
   ...setColorPalette(colors.trueGray, "neutral"),
 }
 
-// reducer to save the selected color in state
+/**
+ * reducer to save the selected color in state
+ * @function
+ * @param {Object} state current React state
+ * @param {Object} action action to take
+ * @returns {Object}
+ */
 const colorReducer = (state, action) => {
   switch (action.type) {
     case "primary":
@@ -120,7 +127,8 @@ const IndexPage = () => {
                   style={{
                     backgroundColor: colors[c][500],
                     color: colors[c][50],
-                  }}>
+                  }}
+                >
                   {!colorNames[c]
                     ? c.toUpperCase()
                     : colorNames[c].toUpperCase()}
