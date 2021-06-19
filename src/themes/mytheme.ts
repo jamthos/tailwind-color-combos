@@ -13,13 +13,9 @@ export const setColorPalette = (colorSet: ColorSet, colorLevel: string) => {
 const defaultTheme = {
   ...setColorPalette(colors.blue, "primary"),
 }
-const pinkTheme = {
-  ...setColorPalette(colors.rose, "primary"),
-}
 
 const MyThemes = {
   default: defaultTheme,
-  pink: pinkTheme,
 }
 
 export default MyThemes

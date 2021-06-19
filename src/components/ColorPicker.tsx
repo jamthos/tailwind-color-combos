@@ -25,17 +25,19 @@ const ColorPicker = ({
 
   return (
     <div tw="p-2">
-      <h3 tw="tracking-wide font-thin">{colorLevel.toUpperCase()}</h3>
+      <h2 tw="tracking-wide font-light text-lg text-trueGray-800 capitalize">
+        {colorLevel}
+      </h2>
       <div tw="grid grid-cols-2 gap-2">
         <div
-          tw="rounded flex flex-col items-center justify-center relative transition-colors duration-100 shadow-inner"
+          ref={colorPreview}
+          tw="rounded flex flex-col items-center justify-center relative transition-colors duration-100 shadow uppercase"
           css={css`
             background-color: ${colors[currentColor][500]};
-            color: ${colors[currentColor][500]};
+            color: ${colors[currentColor][800]};
           `}
-          ref={colorPreview}
         >
-          <h3 tw="p-1 px-2 bg-white rounded-full shadow-md text-xs leading-none tracking-wide font-light">
+          <h3 tw="p-1.5 px-2 bg-white rounded-full shadow text-sm leading-none">
             {
               // show color name on preview swatch
               colorNames[previewColors[colorLevel]] ||
@@ -45,12 +47,13 @@ const ColorPicker = ({
             }
           </h3>
         </div>
-        <div>
+        <div tw="shadow-inner p-1.5 bg-trueGray-50 rounded">
           <ul tw="flex flex-wrap justify-start">
             {Object.keys(colors).map((c, i) => {
-              if (i > 1) {
+              const skipColors = ["black", "white", "lightBlue"]
+              if (!skipColors.includes(c)) {
                 return (
-                  <li tw="h-6" key={c + i}>
+                  <li tw="h-6 w-6 block" key={c + i}>
                     <button
                       onMouseEnter={() =>
                         setPreview(c, true, colorPreview.current, colorLevel)
@@ -61,9 +64,9 @@ const ColorPicker = ({
                       onClick={() => setColor(c, colorLevel)}
                       css={css`
                         background-color: ${colors[c][500]};
-                        color: ${colors[c][700]};
+                        color: ${colors[c][800]};
                       `}
-                      tw="block rounded font-bold w-6 h-6 border-white border-2 focus:(border-current outline-none) hover:(border-current cursor-pointer shadow-inner)"
+                      tw="block rounded font-bold w-full h-6 border-white border-2 focus:(border-current outline-none) hover:(border-current cursor-pointer shadow-inner)"
                     >
                       <span tw="hidden">{c}</span>
                     </button>
