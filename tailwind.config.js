@@ -1,4 +1,4 @@
-const twcolors = require("tailwindcss/colors");
+const twcolors = require("tailwindcss/colors")
 
 const myTheme = {
   colors: {
@@ -70,5 +70,5 @@ module.exports = {
   variants: {
     extend: {},
   },
-  plugins: [],
-};
+  plugins: [require("@tailwindcss/forms")],
+}
