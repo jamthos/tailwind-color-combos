@@ -53,7 +53,7 @@ const ColorPicker = ({
               const skipColors = ["black", "white", "lightBlue"]
               if (!skipColors.includes(c)) {
                 return (
-                  <li tw="h-6 w-6 block flex-grow" key={c + i}>
+                  <li tw="h-6 w-6 block" key={c + i}>
                     <button
                       onMouseEnter={() =>
                         setPreview(c, true, colorPreview.current, colorLevel)
