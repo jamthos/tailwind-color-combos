@@ -17,7 +17,7 @@ const TailwindJoinus = () => (
     </div>
     <div tw="col-start-2 col-span-4 row-start-1 -mb-10 md:(mb-0 col-start-1 col-span-2 row-start-1 py-12)">
       <img
-        src="http://www.fillmurray.com/400/400"
+        src="https://www.fillmurray.com/400/400"
         alt="Mr. Bill"
         tw="rounded-3xl shadow-2xl"
       />

@@ -141,7 +141,7 @@ const IndexPage = function () {
         })}
       </ul>
       <header tw="bg-gray-800 lg:(sticky shadow-lg) top-0 z-20">
-        <div tw="mb-10 p-4 pt-0 rounded-lg grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4">
+        <div tw="mb-10 p-4 pt-0 rounded-lg grid grid-cols-1 md:grid-cols-2 max-w-screen-md mx-auto">
           <ColorPicker
             colorNames={colorNames}
             colorLevel={"primary"}
@@ -151,7 +151,7 @@ const IndexPage = function () {
             setColor={setColor}
           />
 
-          <ColorPicker
+          {/* <ColorPicker
             colorNames={colorNames}
             colorLevel={"secondary"}
             currentColor={colorState.secondary}
@@ -167,7 +167,7 @@ const IndexPage = function () {
             previewColors={previewColors}
             setPreview={setPreview}
             setColor={setColor}
-          />
+          /> */}
 
           <ColorPicker
             colorNames={colorNames}
