@@ -9,9 +9,9 @@ import ColorPicker from "../components/ColorPicker"
 import TailwindCTA from "../components/TailwindCTA"
 import TailwindBanner from "../components/TailwindBanner"
 import TailwindLayout from "../components/TailwindLayout"
-import TailwindHeading from "../components/TailwindHeading"
-import TailwindForm from "../components/TailwindForm"
-// import PriceCards from "../components/PriceCards"
+import TailwindJoinus from "../components/TailwindJoinus"
+// import TailwindHeading from "../components/TailwindHeading"
+// import TailwindForm from "../components/TailwindForm"
 
 import { setColorPalette } from "../themes/mytheme"
 
@@ -117,15 +117,15 @@ const IndexPage = function () {
   }
 
   return (
-    <Layout css={dynamicTheme}>
-      <ul tw="flex flex-wrap justify-start border-t mb-4">
+    <Layout css={dynamicTheme} tw="z-0 relative">
+      <ul tw="flex flex-wrap justify-start p-1 bg-gray-800">
         {Object.keys(colors).map((c) => {
           const skipColors = ["black", "white", "lightBlue"]
           if (!skipColors.includes(c)) {
             return (
               <li
                 key={c}
-                tw="p-2 py-1.5 text-xs rounded flex-grow text-center border border-white -mr-px -mb-px uppercase"
+                tw="p-0.5 sm:(p-2 py-1.5) text-xs rounded-sm flex-grow text-center border border-gray-800 -mr-px -mb-px uppercase"
                 style={{
                   backgroundColor: colors[c][500],
                   color: colors[c][50],
@@ -139,12 +139,8 @@ const IndexPage = function () {
           }
         })}
       </ul>
-      <main tw="container mx-auto my-8 p-2">
-        <h1 tw="text-2xl font-bold  mb-4 tracking-tight text-gray-800">
-          Tailwind Extended Colors
-        </h1>
-
-        <div tw="mb-10 p-4 pt-2 border rounded-lg grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4">
+      <header tw="bg-gray-800 lg:(sticky shadow-lg) top-0 z-20">
+        <div tw="mb-10 p-4 pt-0 rounded-lg grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4">
           <ColorPicker
             colorNames={colorNames}
             colorLevel={"primary"}
@@ -181,7 +177,8 @@ const IndexPage = function () {
             setColor={setColor}
           />
         </div>
-
+      </header>
+      <main tw="container mx-auto my-8 p-2 z-10">
         <article tw="mt-8">
           <h2 tw="text-xl font-bold tracking-tight">Tailwind UI Sample</h2>
           <p>
@@ -192,26 +189,9 @@ const IndexPage = function () {
             <TailwindBanner />
             <TailwindCTA />
             <TailwindLayout />
-            <hr tw="my-10" />
-            <TailwindHeading />
-            <hr tw="my-10" />
-            <TailwindForm />
+            <TailwindJoinus />
           </div>
         </article>
-
-        {/* <div tw="mt-8">
-          <p>
-            <Tag tw="bg-primary-200 text-primary-500">primary</Tag>{" "}
-            <Tag tw="bg-secondary-200 text-secondary-500">secondary</Tag>{" "}
-            <Tag tw="bg-neutral-200 text-neutral-500">neutral</Tag>
-          </p>
-          <h2 tw="text-2xl font-bold tracking-tight mb-2">
-            Cards with Secondary Color
-          </h2>
-          <div tw="p-5 border rounded-lg">
-            <PriceCards />
-          </div>
-        </div> */}
       </main>
     </Layout>
   )

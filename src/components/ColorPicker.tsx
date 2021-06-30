@@ -25,13 +25,13 @@ const ColorPicker = ({
 
   return (
     <div tw="p-2">
-      <h2 tw="tracking-wide font-light text-lg text-trueGray-800 capitalize">
+      <h2 tw="tracking-wide font-light text-lg text-trueGray-100 capitalize">
         {colorLevel}
       </h2>
-      <div tw="grid grid-cols-2 gap-2">
+      <div tw="grid grid-cols-2">
         <div
           ref={colorPreview}
-          tw="rounded flex flex-col items-center justify-center relative transition-colors duration-100 shadow uppercase"
+          tw="rounded-l flex flex-col items-center justify-center relative transition-colors duration-100 shadow uppercase"
           css={css`
             background-color: ${colors[currentColor][500]};
             color: ${colors[currentColor][800]};
@@ -47,13 +47,13 @@ const ColorPicker = ({
             }
           </h3>
         </div>
-        <div tw="shadow-inner p-1.5 bg-trueGray-50 rounded">
-          <ul tw="flex flex-wrap justify-start">
+        <div tw="shadow-inner p-1.5 bg-trueGray-50 rounded-r">
+          <ul tw="flex flex-wrap justify-start max-w-max mx-auto">
             {Object.keys(colors).map((c, i) => {
               const skipColors = ["black", "white", "lightBlue"]
               if (!skipColors.includes(c)) {
                 return (
-                  <li tw="h-6 w-6 block" key={c + i}>
+                  <li tw="h-6 w-6 block flex-grow" key={c + i}>
                     <button
                       onMouseEnter={() =>
                         setPreview(c, true, colorPreview.current, colorLevel)
