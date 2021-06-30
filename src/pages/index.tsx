@@ -181,9 +181,10 @@ const IndexPage = function () {
       </header>
       <main tw="container mx-auto my-8 p-2 z-10">
         <article tw="mt-8">
-          <h2 tw="text-xl font-bold tracking-tight">Tailwind UI Sample</h2>
+          <h2 tw="text-xl font-bold tracking-tight">Sample Elements</h2>
+          <p>Change the primary and neutral colors to see how things look.</p>
           <p>
-            All elements below were taken from Tailwind UI's free sample
+            Some elements below were taken from Tailwind UI's free sample
             components.
           </p>
           <div tw="p-5 my-5 border rounded-lg">
