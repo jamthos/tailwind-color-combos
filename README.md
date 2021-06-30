@@ -1,6 +1,6 @@
 # Tailwind Color Combos
 
-When creating a theme system for a project, I wanted to see how combinations from the default tailwind color palette worked together. This app is a way to choose a primary, secondary and tertiary color from the extended color palette and see how they work together in real time via a few examples.
+When creating a theme system for a recent project, I wanted to see how combinations from the default Tailwind color palette worked together. This app is a way to choose a primary, secondary and tertiary color from the extended Tailwind color palette and see how they work together in real time via a few examples.
 
 ## Coming soon
 

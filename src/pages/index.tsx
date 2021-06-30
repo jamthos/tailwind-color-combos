@@ -10,12 +10,16 @@ import ColorPicker from "../components/ColorPicker"
 import TailwindCTA from "../components/TailwindCTA"
 import TailwindBanner from "../components/TailwindBanner"
 import TailwindLayout from "../components/TailwindLayout"
-import PriceCards from "../components/PriceCards"
+import TailwindJoinus from "../components/TailwindJoinus"
+// import TailwindHeading from "../components/TailwindHeading"
+// import TailwindForm from "../components/TailwindForm"
 
 import { setColorPalette } from "../themes/mytheme"
 
+import { ColorNames, ColorState } from "../types"
+
 //set readable names for some of the color keys
-const colorNames = {
+const colorNames: ColorNames = {
   lightBlue: "light blue",
   warmGray: "warm gray",
   trueGray: "true gray",
@@ -24,9 +28,9 @@ const colorNames = {
 }
 
 // set initial state for color combos
-const initialColorState = {
+const initialColorState: ColorState = {
   primary: "rose",
-  secondary: "lightBlue",
+  secondary: "sky",
   tertiary: "pink",
   neutral: "trueGray",
 }
@@ -37,19 +41,16 @@ const initialColorState = {
 // returns an css object with keys 50 to 900 matching tailwind
 const defaultTheme = {
   ...setColorPalette(colors.rose, "primary"),
-  ...setColorPalette(colors.lightBlue, "secondary"),
+  ...setColorPalette(colors.sky, "secondary"),
   ...setColorPalette(colors.pink, "tertiary"),
   ...setColorPalette(colors.trueGray, "neutral"),
 }
 
-/**
- * reducer to save the selected color in state
- * @function
- * @param {Object} state current React state
- * @param {Object} action action to take
- * @returns {Object}
- */
-const colorReducer = (state, action) => {
+// reducer to save the selected color in state
+const colorReducer = (
+  state: ColorState,
+  action: { type: string; newColor: string }
+) => {
   switch (action.type) {
     case "primary":
       return {
@@ -76,7 +77,7 @@ const colorReducer = (state, action) => {
   }
 }
 
-const IndexPage = () => {
+const IndexPage = function () {
   const [colorState, dispatchColorReducer] = useReducer(
     colorReducer,
     initialColorState
@@ -88,21 +89,26 @@ const IndexPage = () => {
   // callback function for mouseEnter and mouseLeave on color picker
   // changes swatch to show preview color and name
   // returns to selected color in state on mouseLeave
-  const setPreview = (colorName, isOnEnter, el, colorLevel) => {
+  const setPreview = function (
+    colorName: string,
+    isOnEnter: boolean,
+    el: HTMLDivElement,
+    colorLevel: string
+  ) {
     if (isOnEnter) {
       el.style.backgroundColor = colors[colorName][500]
-      el.style.color = colors[colorName][500]
+      el.style.color = colors[colorName][800]
       setPreviewColors({ ...previewColors, [colorLevel]: colorName })
     } else {
       el.style.backgroundColor = colors[colorState[colorLevel]][500]
-      el.style.color = colors[colorState[colorLevel]][500]
+      el.style.color = colors[colorState[colorLevel]][800]
       setPreviewColors({ ...previewColors, [colorLevel]: "" })
     }
   }
 
   // callback function for click event on color picker swatch
   // sets new color in state and updates theme's custom properties
-  const setColor = (whatColor, colorLevel) => {
+  const setColor = function (whatColor: string, colorLevel: string) {
     dispatchColorReducer({ type: colorLevel, newColor: whatColor })
 
     setDynamicTheme((currentTheme) => ({
@@ -112,35 +118,30 @@ const IndexPage = () => {
   }
 
   return (
-    <Layout css={dynamicTheme}>
-      <main tw="container mx-auto my-8 p-2">
-        <h1 tw="text-2xl font-bold  mb-4 tracking-tight text-gray-800">
-          Tailwind Extended Colors
-        </h1>
-        <ul tw="flex flex-wrap justify-start gap-1 border-t pt-4 mb-4">
-          {Object.keys(colors).map((c, i) => {
-            if (i > 1) {
-              return (
-                <li
-                  key={c}
-                  tw="p-2 py-1 rounded shadow text-xs font-light"
-                  style={{
-                    backgroundColor: colors[c][500],
-                    color: colors[c][50],
-                  }}
-                >
-                  {!colorNames[c]
-                    ? c.toUpperCase()
-                    : colorNames[c].toUpperCase()}
-                </li>
-              )
-            } else {
-              return null
-            }
-          })}
-        </ul>
-
-        <div tw="mb-10 p-4 pt-2 border rounded-lg grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4">
+    <Layout css={dynamicTheme} tw="z-0 relative">
+      <ul tw="flex flex-wrap justify-start p-1 bg-gray-800">
+        {Object.keys(colors).map((c) => {
+          const skipColors = ["black", "white", "lightBlue"]
+          if (!skipColors.includes(c)) {
+            return (
+              <li
+                key={c}
+                tw="p-0.5 sm:(p-2 py-1.5) text-xs rounded-sm flex-grow text-center border border-gray-800 -mr-px -mb-px uppercase"
+                style={{
+                  backgroundColor: colors[c][500],
+                  color: colors[c][50],
+                }}
+              >
+                {!colorNames[c] ? c : colorNames[c]}
+              </li>
+            )
+          } else {
+            return null
+          }
+        })}
+      </ul>
+      <header tw="bg-gray-800 lg:(sticky shadow-lg) top-0 z-20">
+        <div tw="mb-10 p-4 pt-0 rounded-lg grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4">
           <ColorPicker
             colorNames={colorNames}
             colorLevel={"primary"}
@@ -177,35 +178,21 @@ const IndexPage = () => {
             setColor={setColor}
           />
         </div>
-
-        <div tw="mt-8">
+      </header>
+      <main tw="container mx-auto my-8 p-2 z-10">
+        <article tw="mt-8">
+          <h2 tw="text-xl font-bold tracking-tight">Tailwind UI Sample</h2>
           <p>
-            <Tag tw="bg-primary-200 text-primary-500">primary</Tag>{" "}
-            <Tag tw="bg-neutral-200 text-neutral-500">neutral</Tag>
+            All elements below were taken from Tailwind UI's free sample
+            components.
           </p>
-          <h2 tw="text-2xl font-bold tracking-tight mb-2">
-            Tailwind UI Sample
-          </h2>
-          <div tw="p-5 border rounded-lg">
+          <div tw="p-5 my-5 border rounded-lg">
             <TailwindBanner />
             <TailwindCTA />
             <TailwindLayout />
+            <TailwindJoinus />
           </div>
-        </div>
-
-        <div tw="mt-8">
-          <p>
-            <Tag tw="bg-primary-200 text-primary-500">primary</Tag>{" "}
-            <Tag tw="bg-secondary-200 text-secondary-500">secondary</Tag>{" "}
-            <Tag tw="bg-neutral-200 text-neutral-500">neutral</Tag>
-          </p>
-          <h2 tw="text-2xl font-bold tracking-tight mb-2">
-            Cards with Secondary Color
-          </h2>
-          <div tw="p-5 border rounded-lg">
-            <PriceCards />
-          </div>
-        </div>
+        </article>
       </main>
     </Layout>
   )

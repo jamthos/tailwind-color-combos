@@ -12,14 +12,16 @@ const TailwindCTA = () => (
         <div tw="inline-flex rounded-md shadow">
           <a
             href="/"
-            tw="inline-flex items-center justify-center px-5 py-3 border border-transparent text-base font-medium rounded-md text-white bg-primary-600 hover:bg-secondary-700">
+            tw="inline-flex items-center justify-center px-5 py-3 border border-transparent text-base font-medium rounded-md text-white bg-primary-600 hover:bg-primary-700"
+          >
             Get started
           </a>
         </div>
         <div tw="ml-3 inline-flex rounded-md shadow">
           <a
             href="/"
-            tw="inline-flex items-center justify-center px-5 py-3 border border-transparent text-base font-medium rounded-md text-primary-600 bg-white hover:bg-primary-50">
+            tw="inline-flex items-center justify-center px-5 py-3 border border-transparent text-base font-medium rounded-md text-primary-600 bg-white hover:(bg-primary-50)"
+          >
             Learn more
           </a>
         </div>
