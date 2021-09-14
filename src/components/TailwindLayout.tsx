@@ -41,7 +41,12 @@ const TailwindLayout = () => (
             </div>
             <div tw="ml-4">
               <dt tw="text-lg leading-6 font-medium text-neutral-900">
-                Competitive exchange rates
+                <a
+                  href="#"
+                  tw="text-secondary-600 hover:(text-secondary-500 underline)"
+                >
+                  Competitive exchange rates
+                </a>
               </dt>
               <dd tw="mt-2 text-base text-neutral-500">
                 Lorem ipsum, dolor sit amet consectetur adipisicing elit.
@@ -73,7 +78,12 @@ const TailwindLayout = () => (
             </div>
             <div tw="ml-4">
               <dt tw="text-lg leading-6 font-medium text-neutral-900">
-                No hidden fees
+                <a
+                  href="#"
+                  tw="text-secondary-600 hover:(text-secondary-500 underline)"
+                >
+                  No hidden fees
+                </a>
               </dt>
               <dd tw="mt-2 text-base text-neutral-500">
                 Lorem ipsum, dolor sit amet consectetur adipisicing elit.
@@ -105,7 +115,12 @@ const TailwindLayout = () => (
             </div>
             <div tw="ml-4">
               <dt tw="text-lg leading-6 font-medium text-neutral-900">
-                Transfers are instant
+                <a
+                  href="#"
+                  tw="text-secondary-600 hover:(text-secondary-500 underline)"
+                >
+                  Transfers are instant
+                </a>
               </dt>
               <dd tw="mt-2 text-base text-neutral-500">
                 Lorem ipsum, dolor sit amet consectetur adipisicing elit.
@@ -137,7 +152,12 @@ const TailwindLayout = () => (
             </div>
             <div tw="ml-4">
               <dt tw="text-lg leading-6 font-medium text-neutral-900">
-                Mobile notifications
+                <a
+                  href="#"
+                  tw="text-secondary-600 hover:(text-secondary-500 underline)"
+                >
+                  Mobile notifications
+                </a>
               </dt>
               <dd tw="mt-2 text-base text-neutral-500">
                 Lorem ipsum, dolor sit amet consectetur adipisicing elit.

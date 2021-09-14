@@ -11,7 +11,7 @@ import TailwindCTA from "../components/TailwindCTA"
 import TailwindBanner from "../components/TailwindBanner"
 import TailwindLayout from "../components/TailwindLayout"
 import TailwindJoinus from "../components/TailwindJoinus"
-// import TailwindHeading from "../components/TailwindHeading"
+import TailwindHeading from "../components/TailwindHeading"
 // import TailwindForm from "../components/TailwindForm"
 
 import { setColorPalette } from "../themes/mytheme"
@@ -141,7 +141,7 @@ const IndexPage = function () {
         })}
       </ul>
       <header tw="bg-gray-800 lg:(sticky shadow-lg) top-0 z-20">
-        <div tw="mb-10 p-4 pt-0 rounded-lg grid grid-cols-1 md:grid-cols-2 max-w-screen-md mx-auto">
+        <div tw="mb-10 p-4 pt-0 rounded-lg grid grid-cols-1 md:grid-cols-3 max-w-screen-lg mx-auto">
           <ColorPicker
             colorNames={colorNames}
             colorLevel={"primary"}
@@ -151,7 +151,7 @@ const IndexPage = function () {
             setColor={setColor}
           />
 
-          {/* <ColorPicker
+          <ColorPicker
             colorNames={colorNames}
             colorLevel={"secondary"}
             currentColor={colorState.secondary}
@@ -160,7 +160,7 @@ const IndexPage = function () {
             setColor={setColor}
           />
 
-          <ColorPicker
+          {/* <ColorPicker
             colorNames={colorNames}
             colorLevel={"tertiary"}
             currentColor={colorState.tertiary}
@@ -192,6 +192,8 @@ const IndexPage = function () {
             <TailwindCTA />
             <TailwindLayout />
             <TailwindJoinus />
+            <TailwindHeading jobType="Back End Developer" />
+            <TailwindHeading jobType="Front End Developer" />
           </div>
         </article>
       </main>

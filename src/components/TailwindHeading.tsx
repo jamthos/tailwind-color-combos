@@ -2,12 +2,12 @@
 import React from "react"
 import "twin.macro"
 
-function TailwindHeading() {
+function TailwindHeading({ jobType }) {
   return (
-    <div tw="lg:flex lg:items-center lg:justify-between">
+    <div tw="lg:flex lg:items-center lg:justify-between py-4">
       <div tw="flex-1 min-w-0">
         <h2 tw="text-2xl font-bold leading-7 text-neutral-900 sm:text-3xl sm:truncate">
-          Back End Developer
+          {jobType}
         </h2>
         <div tw="mt-1 flex flex-col sm:flex-row sm:flex-wrap sm:mt-0 sm:space-x-6">
           <div tw="mt-2 flex items-center text-sm text-neutral-500">
@@ -93,7 +93,7 @@ function TailwindHeading() {
             >
               <path d="M13.586 3.586a2 2 0 112.828 2.828l-.793.793-2.828-2.828.793-.793zM11.379 5.793L3 14.172V17h2.828l8.38-8.379-2.83-2.828z" />
             </svg>
-            Edit
+            Apply
           </button>
         </span>
 
@@ -115,7 +115,7 @@ function TailwindHeading() {
                 clipRule="evenodd"
               />
             </svg>
-            View
+            Share
           </button>
         </span>
 
@@ -137,7 +137,7 @@ function TailwindHeading() {
                 clipRule="evenodd"
               />
             </svg>
-            Publish
+            Save
           </button>
         </span>
 
@@ -164,7 +164,7 @@ function TailwindHeading() {
               />
             </svg>
           </button>
-          <div
+          {/* <div
             tw="origin-top-right absolute right-0 mt-2 -mr-1 w-48 rounded-md shadow-lg py-1 bg-white ring-1 ring-black ring-opacity-5 focus:outline-none"
             role="menu"
             aria-orientation="vertical"
@@ -189,7 +189,7 @@ function TailwindHeading() {
             >
               View
             </a>
-          </div>
+          </div> */}
         </span>
       </div>
     </div>
